@@ -1,0 +1,15 @@
+<% provide(:title, 'Resposta') %>
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <h1>
+        <%= @reply.task.title %>
+      </h1>
+      <h2>
+        <%= @reply.user.name %>
+      </h2>
+    </section>
+    <p>
+    	<%= @reply.answer %>
+    </p>
+</div>

@@ -1,0 +1,7 @@
+<%= f.label :answer, "Resposta" %>
+<%= f.text_area :answer, class: 'form-control' %>
+
+<% if current_user.admin? && !current_user?(user) %>
+<%= f.label :score, "Nota", in: 0.0..10.0, step: 0.1 %>
+<%= f.number :score, class: 'form-control' %>
+<% end %>

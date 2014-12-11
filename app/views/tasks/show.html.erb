@@ -1,0 +1,16 @@
+<% provide(:title, @task.title) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <h1>
+        <%= @task.title %>
+      </h1>
+    </section>
+    <p>
+    	<%= @task.text %>
+    </p>
+    <hr />
+    <p>
+    	<%= link_to "Incluir resposta", new_task_reply_path(@task) %>
+    </p>
+</div>

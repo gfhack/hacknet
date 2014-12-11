@@ -1,0 +1,25 @@
+<% provide(:title, 'Tarefas') %>
+<h1>Tarefas</h1>
+
+<table class="table">
+	<thead>
+			<th>
+				Atividade
+			</th>
+			<% if current_user.admin? && !current_user?(user) %>
+			<th>
+				Editar
+			</th>
+			<th>
+				Excluir
+			</th>
+			<% end %>
+	</thead>
+	<tbody>
+	<%= will_paginate %>
+	
+	<%= render @tasks %>
+
+	<%= will_paginate %>
+	</tbody>
+</table>

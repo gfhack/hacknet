@@ -1,0 +1,13 @@
+<tr>
+	<td>
+	  <%= link_to task.title, task %>
+	</td>
+	<% if current_user.admin? && !current_user?(user) %>
+	<td>
+		<%= link_to "Alterar", edit_task_path(task.id) %>
+	</td>
+	<td>
+		<%= link_to "Deletar", task, method: :delete, data: { confirm: "Deseja excluir?" } %>
+	</td>
+	<% end %>
+</tr>

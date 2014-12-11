@@ -1,0 +1,28 @@
+<% provide(:title, 'Respostas') %>
+<h1>Respostas</h1>
+
+<table class="table">
+	<thead>
+			<th>
+				Aluno
+			</th>
+			<th>
+				Atividade
+			</th>
+			<th>
+				Editar
+			</th>
+			<% if current_user.admin? && !current_user?(user) %>
+			<th>
+				Excluir
+			</th>
+			<% end %>
+	</thead>
+	<tbody>
+	<%= will_paginate %>
+	
+	<%= render @replies %>
+
+	<%= will_paginate %>
+	</tbody>
+</table>
