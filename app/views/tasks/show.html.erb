@@ -44,8 +44,8 @@
       <% @reply.each do |reply| %>
         <% unless reply.nil? %>
           <tr>
-            <td><%= link_to reply.user.name %></td>
-            <td><%= link_to reply.task.title %></td>
+            <td><%= link_to reply.user.name, reply.user %></td>
+            <td><%= link_to reply.task.title, reply.task %></td>
             <td><%= link_to "Alterar", edit_task_reply_path(@task, reply) %></td>
             <td><%= reply.answer %></td>
             <% if current_user.admin? %>
