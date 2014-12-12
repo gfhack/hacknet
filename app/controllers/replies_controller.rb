@@ -43,18 +43,13 @@ class RepliesController < ApplicationController
 	end
 
 	def edit
-		if current_user.id == session[:user_id]
-			@task = Task.find(params[:task_id])
-			@reply = @task.replies.find_by(user_id: current_user.id, id: params[:id])
-		else
-			flash[:warning] = "Não tem permissão!"
-			redirect_to root_url
-		end
+		@task = Task.find(params[:task_id])
+		@reply = @task.replies.find_by(id: params[:id])
 	end
 
 	def update
 		@task = Task.find(params[:task_id])
-		@reply = @task.replies.find_by(user_id: current_user.id, id: params[:id])
+		@reply = @task.replies.find_by(id: params[:id])
 
 		if @reply.update_attributes(reply_params)
 			flash[:success] = "Resposta atualizada"
