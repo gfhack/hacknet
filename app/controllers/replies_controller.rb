@@ -21,8 +21,12 @@ class RepliesController < ApplicationController
 		@reply = @task.replies.new(reply_params)
 		@reply.user = current_user
 		
-	    if @reply.save
-	      flash[:info] = "Respondido com sucesso!"
+		exists = @task.replies.find_by(user_id: current_user.id)
+
+		if !exists
+		    if @reply.save
+		      flash[:info] = "Respondido com sucesso!"
+		  	end
 	  	end
 
 	    redirect_to task_replies_url(@task)
