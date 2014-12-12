@@ -1,1 +1,24 @@
 <h1>Bem vindo(a) ao HackNet!</h1>
+
+<% if current_user %>
+<hr />
+<h2>Tarefas</h2>
+<table class="table">
+	<thead>
+			<th>
+				Atividade
+			</th>
+			<% if current_user.admin? %>
+			<th>
+				Editar
+			</th>
+			<th>
+				Excluir
+			</th>
+			<% end %>
+	</thead>
+	<tbody>
+	<%= render @tasks %>
+	</tbody>
+</table>
+<% end %>

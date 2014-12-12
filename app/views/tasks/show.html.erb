@@ -6,11 +6,56 @@
         <%= @task.title %>
       </h1>
     </section>
+
     <p>
     	<%= @task.text %>
     </p>
+    </aside>
+
     <hr />
+
     <p>
-    	<%= link_to "Incluir resposta", new_task_reply_path(@task) %>
+      <%= link_to "Incluir resposta", new_task_reply_path(@task), class: "btn btn-default" %>
     </p>
+
+    <hr />
+
+  <table class="table">
+    <thead>
+        <th>
+          Aluno
+        </th>
+        <th>
+          Atividade
+        </th>
+        <th>
+          Editar
+        </th>
+        <th>
+          Resposta
+        </th>
+        <% if current_user.admin? %>
+        <th>
+          Excluir
+        </th>
+        <% end %>
+    </thead>
+    <tbody>
+      <% @reply.each do |reply| %>
+        <% unless reply.nil? %>
+          <tr>
+            <td><%= link_to reply.user.name %></td>
+            <td><%= link_to reply.task.title %></td>
+            <td><%= link_to "Alterar", edit_task_reply_path(@task, reply) %></td>
+            <td><%= reply.answer %></td>
+            <% if current_user.admin? %>
+              <td>
+                <%= link_to "Deletar", [@task, reply], method: :delete, data: { confirm: "Deseja excluir?" } %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 </div>

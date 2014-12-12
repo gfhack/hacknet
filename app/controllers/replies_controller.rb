@@ -2,8 +2,13 @@ class RepliesController < ApplicationController
 	include SessionsHelper
 
 	def index
-		@task = Task.find(params[:task_id])
-		@replies = @task.replies.paginate(page: params[:page])
+		if current_user.admin?
+			@task = Task.find(params[:task_id])
+			@replies = @task.replies.paginate(page: params[:page])
+		else
+			flash[:warning] = "Não tem permissão!"
+			redirect_to root_url
+		end
 	end
 
 	def new
@@ -15,6 +20,7 @@ class RepliesController < ApplicationController
 		@task = Task.find(params[:task_id])
 		@reply = @task.replies.new(reply_params)
 		@reply.user = current_user
+		
 	    if @reply.save
 	      flash[:info] = "Respondido com sucesso!"
 	  	end
@@ -24,8 +30,8 @@ class RepliesController < ApplicationController
 
 	def destroy
 		Reply.find(params[:id]).destroy
-		flash[:success] = "Resposta deletada"
-		redirect_to replies_url
+		flash[:success] = "Resposta deletada!"
+		redirect_to task_replies_url
 	end
 
 	def show
@@ -33,8 +39,13 @@ class RepliesController < ApplicationController
 	end
 
 	def edit
-		@task = Task.find(params[:task_id])
-		@reply = @task.replies.find_by(user_id: current_user.id)
+		if current_user.id == session[:user_id]
+			@task = Task.find(params[:task_id])
+			@reply = @task.replies.find_by(user_id: current_user.id)
+		else
+			flash[:warning] = "Não tem permissão!"
+			redirect_to root_url
+		end
 	end
 
 	def update
