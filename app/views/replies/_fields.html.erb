@@ -3,7 +3,7 @@
 
 <% if current_user.admin? %>
 <%= f.label :score, "Nota" %>
-<%= f.number_field :score, class: 'form-control', in: 0.0..100.0, step: 1 %>
+<%= f.number_field :score, class: 'form-control', in: 0..100, step: 1 %>
 <% end %>
 
 <br />

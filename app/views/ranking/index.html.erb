@@ -1,0 +1,17 @@
+<% provide(:title, 'Ranking') %>
+<h1>Ranking de maior nota</h1>
+
+<table class="table">
+	<thead>
+		<th>Aluno</th>
+		<th>Nota</th>
+	</thead>
+	<tbody>
+		<% @replies.each do |reply| %>
+			<tr>
+				<td><%= link_to reply.user.name, reply.user %></td>
+				<td><%= reply.score %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

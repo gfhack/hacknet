@@ -3,7 +3,7 @@ class CreateReplies < ActiveRecord::Migration
     create_table :replies do |t|
     	t.references :task
     	t.references :user
-    	t.decimal :score
+    	t.decimal :score, default: 0
     end
   end
 end

@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20141210213126) do
   create_table "replies", force: true do |t|
     t.integer "task_id"
     t.integer "user_id"
-    t.decimal "score"
+    t.decimal "score",   default: 0.0
     t.text    "answer"
   end
 

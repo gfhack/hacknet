@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get    'signup'  => 'users#new'
   get    'login'   => 'sessions#new'
+  get    'ranking' => 'ranking#index'
 
   post   'login'   => 'sessions#create'
   

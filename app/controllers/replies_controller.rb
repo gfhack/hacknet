@@ -41,7 +41,7 @@ class RepliesController < ApplicationController
 	def edit
 		if current_user.id == session[:user_id]
 			@task = Task.find(params[:task_id])
-			@reply = @task.replies.find_by(user_id: current_user.id)
+			@reply = @task.replies.find_by(user_id: current_user.id, id: params[:id])
 		else
 			flash[:warning] = "Não tem permissão!"
 			redirect_to root_url
@@ -50,7 +50,7 @@ class RepliesController < ApplicationController
 
 	def update
 		@task = Task.find(params[:task_id])
-		@reply = @task.replies.find_by(user_id: current_user.id)
+		@reply = @task.replies.find_by(user_id: current_user.id, id: params[:id])
 
 		if @reply.update_attributes(reply_params)
 			flash[:success] = "Resposta atualizada"
@@ -63,6 +63,6 @@ class RepliesController < ApplicationController
 	private
 
 	def reply_params
-		params.require(:reply).permit(:answer)
+		params.require(:reply).permit(:answer, :score)
 	end
 end
